@@ -68,6 +68,7 @@ public class MSButton
     
     public MSButton ( int rr, int cc )
     {
+
          width = 400/NUM_COLS;
          height = 400/NUM_ROWS;
         r = rr;
@@ -116,15 +117,21 @@ public class MSButton
     public boolean isValid(int r, int c)
     {
         //your code here
-        return false;
+        if(r >= 0 && r <= 20 && c >= 0 && c <=20) 
+            return true; 
+        else  
+          return false;
     }
+   
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
         //your code here
+        for(int i= -1; i < 2; i++) { 
+            for(int j = -1; j < 2; j++) { 
+                if(isValid(row+i,col+j) && buttons[row+i][col+j])  
+                    numBombs++;  
+            } 
+        }    
         return numBombs;
-    }
-}
-
-
-
+    } 
