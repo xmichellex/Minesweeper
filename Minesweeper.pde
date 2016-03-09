@@ -93,6 +93,8 @@ public class MSButton
     {
         clicked = true;
         //your code here
+        if(keyPressed == true) 
+            
     }
 
     public void draw () 
@@ -129,9 +131,10 @@ public class MSButton
         //your code here
         for(int i= -1; i < 2; i++) { 
             for(int j = -1; j < 2; j++) { 
-                if(isValid(row+i,col+j) && buttons[row+i][col+j])  
+                if(isValid(row+i,col+j) && buttons[row+i][col+j].isMarked())  
                     numBombs++;  
             } 
         }    
         return numBombs;
     } 
+} 
