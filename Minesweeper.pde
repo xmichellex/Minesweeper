@@ -36,6 +36,7 @@ public void setBombs()
     if(!bombs.contains(buttons[row][col])) {  
         bombs.add(buttons[row][col]); 
         } 
+    //i--;
     }
 } 
 
@@ -53,6 +54,7 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     //your code here
+    text("You lose!", 200, 200); 
 }
 public void displayWinningMessage()
 {
@@ -90,13 +92,31 @@ public class MSButton
     // called by manager
     
     public void mousePressed () 
-    {
+    { 
         clicked = true;
         //your code here
         if(keyPressed == true) 
-            
-    }
-
+          marked=!marked;
+        else if(bombs.contains(this)) 
+          displayLosingMessage(); 
+        else if(countBombs(r, c) > 0) {
+          setLabel(""+countBombs(r, c));
+        }
+        else 
+        {
+            for(int i= -1; i < 2; i++) { 
+                for(int j = -1; j < 2; j++) { 
+                    if(isValid(r+i,c+j)==true) {
+                        if(buttons[r+i][c+j].isClicked() == false) { 
+                        //recursively call mousepressed
+                        buttons[r+i][c+j].mousePressed(); 
+                        System.out.println("press");
+                    } 
+                }
+            }
+        }
+    } 
+} 
     public void draw () 
     {    
         if (marked)
@@ -118,8 +138,8 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        //your code here
-        if(r >= 0 && r <= 20 && c >= 0 && c <=20) 
+        
+        if(r >= 0 && r < 20 && c >= 0 && c <20) 
             return true; 
         else  
           return false;
@@ -128,13 +148,14 @@ public class MSButton
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        //your code here
+        
         for(int i= -1; i < 2; i++) { 
             for(int j = -1; j < 2; j++) { 
-                if(isValid(row+i,col+j) && buttons[row+i][col+j].isMarked())  
-                    numBombs++;  
-            } 
-        }    
+                if(isValid(row+i,col+j) && bombs.contains(buttons[row+i][col+j])) {
+                    numBombs++;
+                }
+            }  
+        }     
         return numBombs;
     } 
-} 
+}  
