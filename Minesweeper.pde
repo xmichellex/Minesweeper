@@ -52,12 +52,9 @@ public boolean isWon()
     int markBombs = 0; 
     for(int i = 0; i < bombs.size(); i++) 
     { 
-<<<<<<< HEAD
         if(bombs.get(i).isMarked() == true) 
-=======
-        if(bombs.get(i).isMarked == true) 
->>>>>>> c9cfbda8e598c4c86c6ff5c8331ec7b6a790d245
-            markBombs++; 
+                if(bombs.get(i).isMarked() == true) 
+                    markBombs++; 
     } 
     if(markBombs == bombs.size()) 
         return true; 
